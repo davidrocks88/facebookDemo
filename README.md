@@ -117,7 +117,7 @@ function login() {
 </html>
 ```
 When you load the page, all you will see is this:![Homepage with only login button](https://github.com/davidrocks88/facebookDemo/blob/master/OneButton.png?raw=true)
-When you click the login button, though, you get this wonderul popup:![QuickStartPage](https://github.com/davidrocks88/facebookDemo/blob/master/initialLogin.png?raw=true)
+When you click the login button, though, you get this wonderul popup:![QuickStartPage](https://raw.githubusercontent.com/davidrocks88/facebookDemo/master/initalLogin.png)
 After saying yes, then letting the app have the appropriate permissions, you should be all set! See my notes at the bottom about my notes on Facebook permissions.
 
 ## Doing useful things with the API: User Info
