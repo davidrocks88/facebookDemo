@@ -1,11 +1,9 @@
 <!doctype html> 
 <html>
 <head>
-  <title>Comp 20</title>
+  <title>facebookDemo</title>
 </head>
 <body>
-<script>
-
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -22,9 +20,27 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-</script>
-</script>
 
+
+function login() {
+  FB.login(function(response) {
+    if (response.status === 'connected') {
+        alert("connected");
+    } else if (response.status === 'not_authorized') {
+        alert("not authorized");
+    } else {
+        alert('You are not logged into Facebook.');
+    }
+  });
+}
+function getInfo() {
+  FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+          alert("Hello, " + response.first_name + " " + response.last_name + ", ID #" + response.id);
+  });
+}
+</script>
+<button onclick="login()"> login </button>
+<button onclick="getInfo()"> getInfo </button>
 </body>
 </html>
 

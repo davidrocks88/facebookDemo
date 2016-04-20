@@ -4,7 +4,7 @@
 As promised in the Tufts University Comp 20 (Web Development) class, here is a short tutorial/demo for how to use the Facebook API using front-end javascript. I do not claim to be an expert in it, but after many weeks of working with the API, I can safely say that I am fairly familiar with the fundamentals of the site. Feel free to copy and paste code directly from this tutorial; I know how hard it is to find code about the Facebook API that makes sense (though please do cite the code accordingly!).
 
 ## Initial Setup
-So the first thing we want to do is actually set up the app through Facebook! Start by going to [www.developers.facebook.com](www.developers.facebook.com). Click on quick start, choose www (web), and you'll presented with this page: ![QuickStartPage](https://github.com/davidrocks88/facebookDemo/blob/master/QuickStartPage.png?raw=true). Give a name, category, etc., and you'll eventually get your app ID (super important number, don't give it away willy nilly!). When you scroll down, you'll see this code for setting up the Facebook SDK for Javascript:
+So the first thing we want to do is actually set up the app through Facebook! Start by going to [www.developers.facebook.com](www.developers.facebook.com). Click on quick start, choose www (web), and you'll presented with this page: ![QuickStartPage](https://github.com/davidrocks88/facebookDemo/blob/master/QuickStartPage.png?raw=true) Give a name, category, etc., and you'll eventually get your app ID (super important number, don't give it away willy nilly!). When you scroll down, you'll see this code for setting up the Facebook SDK for Javascript:
 
 ```html
 <script>
@@ -26,7 +26,7 @@ So the first thing we want to do is actually set up the app through Facebook! St
 </script>
 ```
 
-Copy and paste this code into an HTML file, load it up, and there we go! Facebook has loaded! Exciting, right?! Well, not exactly. nothing has really happened yet, all you've done is loaded the SDK. Before moving forward, make sure that you scroll down to the part which asks about which url you are using. ![URL: Change it to localhost:8000](https://github.com/davidrocks88/facebookDemo/blob/master/URL.png?raw=true). I chose to use http://localhost:8000 since that's where I'm hosting my content, but when you are actually hosting content on a website on the web, change this url!
+Copy and paste this code into an HTML file, load it up, and there we go! Facebook has loaded! Exciting, right?! Well, not exactly. nothing has really happened yet, all you've done is loaded the SDK. Before moving forward, make sure that you scroll down to the part which asks about which url you are using. ![URL: Change it to localhost:8000](https://github.com/davidrocks88/facebookDemo/blob/master/URL.png?raw=true) I chose to use http://localhost:8000 since that's where I'm hosting my content, but when you are actually hosting content on a website on the web, change this url!
 
 So far, this is the HTML I have:
 ```html
@@ -74,7 +74,7 @@ FB.login(function(response) {
             });
 
 ```
-Not too bad, right? A simple javascript callback function. But how do you actually implement this into your code, you ask? Well, as an example, I made a button that, when clicked, would log in the user. The code is as follows:
+Not too bad, right? A simple javascript callback function. But how do you actually implement this into your code, you ask? Well, as an example, I puth the script into a functin and made a button that, when clicked, would log in the user. The code is as follows:
 ```html
 <!doctype html> 
 <html>
@@ -85,7 +85,7 @@ Not too bad, right? A simple javascript callback function. But how do you actual
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1674115936182026',
+      appId      : '[your app id]',
       xfbml      : true,
       version    : 'v2.6'
     });
@@ -116,5 +116,71 @@ function login() {
 </body>
 </html>
 ```
-When you load the page, all you will see is this:![Homepage with only login button](https://github.com/davidrocks88/facebookDemo/blob/master/OneButton.png?raw=true).
+When you load the page, all you will see is this:![Homepage with only login button](https://github.com/davidrocks88/facebookDemo/blob/master/OneButton.png?raw=true)
+When you click the login button, though, you get this wonderul popup:![QuickStartPage](https://github.com/davidrocks88/facebookDemo/blob/master/initialLogin.png?raw=true)
+After saying yes, then letting the app have the appropriate permissions, you should be all set! See my notes at the bottom about my notes on Facebook permissions.
+
+## Doing useful things with the API: User Info
+One of the best uses for the API is to get unique user information, which means that you personally do not have to generate user IDs or handle any secure login, which is extremely convenient! One should note that every Facebook user has a unique identifier. You can actually copy your own identifier, go to facebook.com/[identifier], and you'll see your home page pop up! 
+So, how do you get user info? Well, we can use this handy little script here:
+
+```js
+FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+        alert("Hello, " + response.first_name + " " + response.last_name " + ", ID #" + response.id");
+});
+```
+Lets examine this code briefly. The API usually has the parameters of path (aka /me, who is the current person logged in), the action (in this case, we are doing a 'GET' action), some parameters (in this case, what info you want to get back), and a callback function with what you want to do with the response you get from Facebook. In practice, this is what my HTML code looks like now:
+```html
+<!doctype html> 
+<html>
+<head>
+  <title>facebookDemo</title>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1674115936182026',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+function login() {
+  FB.login(function(response) {
+    if (response.status === 'connected') {
+        alert("connected");
+    } else if (response.status === 'not_authorized') {
+        alert("not authorized");
+    } else {
+        alert('You are not logged into Facebook.');
+    }
+  });
+}
+function getInfo() {
+  FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+          alert("Hello, " + response.first_name + " " + response.last_name + ", ID #" + response.id);
+  });
+}
+</script>
+<button onclick="login()"> login </button>
+<button onclick="getInfo()"> getInfo </button>
+</body>
+</html>
+```
+
+When you open it, notice that after you click the login button, it'll automatically log you in! Next, when you press the getInfo button, you can see your first name, last name, and id number!
+[Page with getInfo button](https://github.com/davidrocks88/facebookDemo/blob/master/getInfo.png?raw=true)
+
+From here, most people have what they need from Facebook; a secure way to have unique users log in. I'll briefly go into posting to the user's Facebook wall, but most readers can stop reading here!
+
 
