@@ -64,14 +64,14 @@ So naturally, the first thing we want to do is let the user log in to Facebook. 
 
 ```js
 FB.login(function(response) {
-                if (response.status === 'connected') {
-                    alert("connected");
-                } else if (response.status === 'not_authorized') {
-                    alert("not authorized");
-                } else {
-                    alert('You are not logged into Facebook.');
-                }
-            });
+        if (response.status === 'connected') {
+            alert("connected");
+        } else if (response.status === 'not_authorized') {
+            alert("not authorized");
+        } else {
+            alert('You are not logged into Facebook.');
+        }
+});
 
 ```
 Not too bad, right? A simple javascript callback function. But how do you actually implement this into your code, you ask? Well, as an example, I puth the script into a functin and made a button that, when clicked, would log in the user. The code is as follows:
@@ -118,7 +118,7 @@ function login() {
 ```
 When you load the page, all you will see is this:![Homepage with only login button](https://github.com/davidrocks88/facebookDemo/blob/master/OneButton.png?raw=true)
 When you click the login button, though, you get this wonderul popup:![QuickStartPage](https://raw.githubusercontent.com/davidrocks88/facebookDemo/master/initalLogin.png)
-After saying yes, then letting the app have the appropriate permissions, you should be all set! See my notes at the bottom about my notes on Facebook permissions.
+After saying yes, then letting the app have the appropriate permissions, you should be all set with the basics!
 
 ## Doing useful things with the API: User Info
 One of the best uses for the API is to get unique user information, which means that you personally do not have to generate user IDs or handle any secure login, which is extremely convenient! One should note that every Facebook user has a unique identifier. You can actually copy your own identifier, go to facebook.com/[identifier], and you'll see your home page pop up! 
