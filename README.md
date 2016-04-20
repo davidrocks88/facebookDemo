@@ -39,7 +39,7 @@ So far, this is the HTML I have:
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1674115936182026',
+      appId      : '[your app id]',
       xfbml      : true,
       version    : 'v2.6'
     });
@@ -58,4 +58,63 @@ So far, this is the HTML I have:
 </html>
 
 ```
+
+## Loggin' In
+So naturally, the first thing we want to do is let the user log in to Facebook. The cool thing about this is that once a user logs in, they won't have to log in again! The code for logging in can be found in the Facebook API, but you can just copy and paste this code to make your life easier:
+
+```js
+FB.login(function(response) {
+                if (response.status === 'connected') {
+                    alert("connected");
+                } else if (response.status === 'not_authorized') {
+                    alert("not authorized");
+                } else {
+                    alert('You are not logged into Facebook.');
+                }
+            });
+
+```
+Not too bad, right? A simple javascript callback function. But how do you actually implement this into your code, you ask? Well, as an example, I made a button that, when clicked, would log in the user. The code is as follows:
+```html
+<!doctype html> 
+<html>
+<head>
+  <title>facebookDemo</title>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1674115936182026',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+function login() {
+            FB.login(function(response) {
+                if (response.status === 'connected') {
+                    alert("connected");
+                } else if (response.status === 'not_authorized') {
+                    alert("not authorized");
+                } else {
+                    alert('You are not logged into Facebook.');
+                }
+            });
+        }
+</script>
+<button onclick="login()"> login </button>
+</body>
+</html>
+```
+When you load the page, all you will see is this:![Homepage with only login button](https://github.com/davidrocks88/facebookDemo/blob/master/OneButton.png?raw=true).
 
