@@ -1,4 +1,5 @@
 # facebookDemo - David Bernstein
+Last Updated: April 20, 2016
 
 ##Introduction
 As promised in the Tufts University Comp 20 (Web Development) class, here is a short tutorial/demo for how to use the Facebook API using front-end javascript. I do not claim to be an expert in it, but after many weeks of working with the API, I can safely say that I am fairly familiar with the fundamentals of the site. Feel free to copy and paste code directly from this tutorial; I know how hard it is to find code about the Facebook API that makes sense (though please do cite the code accordingly!).
@@ -258,8 +259,15 @@ function post() {
 ```
 
 When you reload the page, you'll see three buttons there! Make sure to test the login and getInfo buttons to make sure they're working. Finally, click the post button. You'll be prompted like this: ![Post prompt example](https://github.com/davidrocks88/facebookDemo/blob/master/postExample.png?raw=true) 
-Fill in the box, hit enter, and if it works, you'll get a post ID! Now, go check your Facebook wall. I'll wait.
+Fill in the box, hit enter, and if it works, you'll get a post ID! Now, go check your Facebook wall. I'll wait......
 Did you see that?! It worked! You can now post to a client's wall! You can also do a bunch of other cool stuff with posting to user's walls too, such as links and whatnot (however, posting images is a different monster, as you'll see in the authorization section).
+
+## Authorization
+Authorization is tricky with Facebook. You only get the most basic permissions at the beginning, and if you want more permissions, you have to make a request to Facebook directly using the app dashboard that we saw in the beginning. Things such as posting pictures, for instance, will require you to do things like that. After getting the appropriate permissions, you have to then add extra parameters to the appropriate API call, such as access tokens and {scope: 'publish_actions'}. Let me know if you have any questions, and I'll try to help you the best I can.
+
+## Concluding Notes
+The Facebook API can be...finicky, at times. The learning curve is somewhat steep at the beginning, but hopefully after this tutorial, you'll be a master at it! Feel free to contact me if you have any questions! Otherwise, happy coding!
+
 
 
 
