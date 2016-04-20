@@ -6,7 +6,7 @@ As promised in the Tufts University Comp 20 (Web Development) class, here is a s
 ## Initial Setup
 So the first thing we want to do is actually set up the app through Facebook! Start by going to [www.developers.facebook.com](www.developers.facebook.com). Click on quick start, choose www (web), and you'll presented with this page: [image1]. Give a name, category, etc., and you'll eventually get your app ID (super important number, don't give it away willy nilly!). When you scroll down, you'll see this code for setting up the Facebook SDK for Javascript:
 
-```
+```html
 <script>
   window.fbAsyncInit = function() {
     FB.init({
