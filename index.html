@@ -38,9 +38,21 @@ function getInfo() {
           alert("Hello, " + response.first_name + " " + response.last_name + ", ID #" + response.id);
   });
 }
+
+function post() {
+        var msg = prompt("give me a post!", "example");
+        FB.api('/me/feed', 'post', { message: msg }, function(response) {
+          if (!response || response.error) {
+            alert('Error occured');
+          } else {
+            alert('Post ID: ' + response.id);
+          }
+        });
+    }
 </script>
 <button onclick="login()"> login </button>
 <button onclick="getInfo()"> getInfo </button>
+<button onclick="post()"> post </button>
 </body>
 </html>
 

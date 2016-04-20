@@ -125,9 +125,9 @@ One of the best uses for the API is to get unique user information, which means 
 So, how do you get user info? Well, we can use this handy little script here:
 
 ```js
-FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
-        alert("Hello, " + response.first_name + " " + response.last_name " + ", ID #" + response.id");
-});
+  FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+          alert("Hello, " + response.first_name + " " + response.last_name + ", ID #" + response.id);
+  });
 ```
 Lets examine this code briefly. The API usually has the parameters of path (aka /me, who is the current person logged in), the action (in this case, we are doing a 'GET' action), some parameters (in this case, what info you want to get back), and a callback function with what you want to do with the response you get from Facebook. In practice, this is what my HTML code looks like now:
 ```html
@@ -140,7 +140,7 @@ Lets examine this code briefly. The API usually has the parameters of path (aka 
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1674115936182026',
+      appId      : '[your app id]',
       xfbml      : true,
       version    : 'v2.6'
     });
@@ -179,8 +179,89 @@ function getInfo() {
 ```
 
 When you open it, notice that after you click the login button, it'll automatically log you in! Next, when you press the getInfo button, you can see your first name, last name, and id number!
-[Page with getInfo button](https://github.com/davidrocks88/facebookDemo/blob/master/getInfo.png?raw=true)
+![Page with getInfo button](https://github.com/davidrocks88/facebookDemo/blob/master/getInfo.png?raw=true)
 
 From here, most people have what they need from Facebook; a secure way to have unique users log in. I'll briefly go into posting to the user's Facebook wall, but most readers can stop reading here!
+
+## Posting to a User's wall
+The code for this is fairly simple too, and can be found on the developers page (though some digging might be required).
+```js
+        var msg = prompt("give me a post!", "example");
+        FB.api('/me/feed', 'post', { message: msg }, function(response) {
+          if (!response || response.error) {
+            alert('Error occured');
+          } else {
+            alert('Post ID: ' + response.id);
+          }
+        });
+```
+Let's quickly dissect this code. First, we get a message that we want to post to the user's wall. Then we make a call to the api, where the path is the user's home feed (/me/feed), the action is post, the parameters are the message (and nothing else), and we have a callback function outlining what happens when a post works correctly. 
+After putting this code into a new friendly button function, this is what the code finally looks like:
+```html
+<!doctype html> 
+<html>
+<head>
+  <title>facebookDemo</title>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '[your app id]',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+function login() {
+  FB.login(function(response) {
+    if (response.status === 'connected') {
+        alert("connected");
+    } else if (response.status === 'not_authorized') {
+        alert("not authorized");
+    } else {
+        alert('You are not logged into Facebook.');
+    }
+  });
+}
+function getInfo() {
+  FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+          alert("Hello, " + response.first_name + " " + response.last_name + ", ID #" + response.id);
+  });
+}
+
+function post() {
+        var msg = prompt("give me a post!", "example");
+        FB.api('/me/feed', 'post', { message: msg }, function(response) {
+          if (!response || response.error) {
+            alert('Error occured');
+          } else {
+            alert('Post ID: ' + response.id);
+          }
+        });
+    }
+</script>
+<button onclick="login()"> login </button>
+<button onclick="getInfo()"> getInfo </button>
+<button onclick="post()"> post </button>
+</body>
+</html>
+```
+
+When you reload the page, you'll see three buttons there! Make sure to test the login and getInfo buttons to make sure they're working. Finally, click the post button. You'll be prompted like this: ![Post prompt example](https://github.com/davidrocks88/facebookDemo/blob/master/postExample.png?raw=true) 
+Fill in the box, hit enter, and if it works, you'll get a post ID! Now, go check your Facebook wall. I'll wait.
+Did you see that?! It worked! You can now post to a client's wall! You can also do a bunch of other cool stuff with posting to user's walls too, such as links and whatnot (however, posting images is a different monster, as you'll see in the authorization section).
+
+
+
 
 
