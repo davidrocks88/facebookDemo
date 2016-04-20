@@ -10,6 +10,37 @@ So the first thing we want to do is actually set up the app through Facebook! St
 <script>
   window.fbAsyncInit = function() {
     FB.init({
+      appId      : '[your app id]',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+```
+
+Copy and paste this code into an HTML file, load it up, and there we go! Facebook has loaded! Exciting, right?! Well, not exactly. nothing has really happened yet, all you've done is loaded the SDK. Before moving forward, make sure that you scroll down to the part which asks about which url you are using. [image2]. I chose to use http://localhost:8000 since that's where I'm hosting my content, but when you are actually hosting content on a website on the web, change this url!
+
+So far, this is the HTML I have:
+```html
+<!doctype html> 
+<html>
+<head>
+  <title>facebookDemo</title>
+</head>
+<body>
+<script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
       appId      : '1674115936182026',
       xfbml      : true,
       version    : 'v2.6'
@@ -24,5 +55,10 @@ So the first thing we want to do is actually set up the app through Facebook! St
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+</script>
+
+</body>
+</html>
+
 ```
 
