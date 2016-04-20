@@ -1,5 +1,6 @@
 # facebookDemo - David Bernstein
 Last Updated: April 20, 2016
+
 TL; DR: Feel free to copy the index.html file in this repository and figure out how the Facebook API works; I tried to make the code fairly self explanatory. If you would like a more in-depth analysis of the code, feel free to read this guide! Regardless, if you do decide to use the code, please cite where it came from! Happy coding!
 
 ##Introduction
