@@ -1,5 +1,6 @@
 # facebookDemo - David Bernstein
 Last Updated: April 20, 2016
+TL; DR: Feel free to copy the index.html file in this repository and figure out how the Facebook API works; I tried to make the code fairly self explanatory. If you would like a more in-depth analysis of the code, feel free to read this guide! Regardless, if you do decide to use the code, please cite where it came from! Happy coding!
 
 ##Introduction
 As promised in the Tufts University Comp 20 (Web Development) class, here is a short tutorial/demo for how to use the Facebook API using front-end javascript. I do not claim to be an expert in it, but after many weeks of working with the API, I can safely say that I am fairly familiar with the fundamentals of the site. Feel free to copy and paste code directly from this tutorial; I know how hard it is to find code about the Facebook API that makes sense (though please do cite the code accordingly!).
